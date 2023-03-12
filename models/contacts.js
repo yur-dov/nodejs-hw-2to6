@@ -1,6 +1,6 @@
 const { Schema, model } = require('mongoose');
 const Joi = require('joi');
-const { hendleSaveError } = require('../middleware');
+const { handleSaveError } = require('../middleware');
 
 const validPhone = /^[0-9]+$/;
 
@@ -23,11 +23,15 @@ const contactSchema = new Schema(
       type: Boolean,
       default: false,
     },
+    owner: {
+      type: Schema.Types.ObjectId,
+      ref: 'user',
+    },
   },
   { versionKey: false, timestamps: true }
 );
 
-contactSchema.post('save,', hendleSaveError);
+contactSchema.post('save', handleSaveError);
 
 const contactAddSchema = Joi.object({
   name: Joi.string().min(3).max(30).required(),
