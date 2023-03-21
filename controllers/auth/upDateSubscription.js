@@ -1,5 +1,4 @@
 const { User } = require('../../models/users');
-
 const { RequestError } = require('../../helpers');
 
 const upDateSubscription = async (req, res) => {
