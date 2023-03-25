@@ -36,11 +36,23 @@ router.patch(
     validateBody(schemas.updateSubscriptionSchema),
     ctrlWrapper(ctrl.upDateSubscription),
 );
+
 router.patch(
   '/avatars',
   authenticate,
   upload.single('avatar'),
   ctrlWrapper(ctrl.upDateAvatar)
 );
+
+router.get(
+    '/veryfy:verificationToken',
+    ctrlWrapper(ctrl.verify)
+);
+
+router.post(
+    '/verify',
+    validateBody(schemas.verifyEmailSchema),
+    ctrlWrapper(ctrl.resendVerify)
+)
 
 module.exports = router;
